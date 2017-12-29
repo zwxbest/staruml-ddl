@@ -128,9 +128,21 @@ define(function (require, exports, module) {
         if (elem.primaryKey || !elem.nullable) {
             line += " NOT NULL";
         }
+
+        if (options.dbms === "mysql") {
+
+            var documentation = elem.documentation;
+            if (!!documentation){
+                line += "COMMENT '" + self.replaceAll(documentation, "'", "''") + "'"
+            }
+        }
+
         return line;
     };
 
+    DDLGenerator.prototype.replaceAll = function(target, search, replacement) {
+        return target.split(search).join(replacement);
+    };
 
     /**
      * Write Foreign Keys
@@ -220,6 +232,7 @@ define(function (require, exports, module) {
             if (col.unique) {
                 uniques.push(self.getId(col.name, options));
             }
+
             lines.push(self.getColumnString(col, options));
         });
 
