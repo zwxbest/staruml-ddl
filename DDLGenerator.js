@@ -117,21 +117,23 @@ define(function (require, exports, module) {
      * @param {Object} options
      * @return {String}
      */
-    DDLGenerator.prototype.getColumnString = function (elem, options) {
+    DDLGenerator.prototype.getColumnString = function (col, options) {
         var self = this;
         var line = self.getId(elem.name, options);
-        var _type = elem.getTypeString();
+        var _type = col.getTypeString();
         if (_type.trim().length === 0) {
             _type ="INTEGER";
         }
         line += " " + _type;
-        if (elem.primaryKey || !elem.nullable) {
+        if (col.primaryKey || !col.nullable) {
             line += " NOT NULL";
         }
 
+        line += "COMMENT '备注'"
+
         if (options.dbms === "mysql") {
 
-            var documentation = elem.documentation;
+            var documentation = col.documentation;
             if (!!documentation){
                 line += "COMMENT '" + self.replaceAll(documentation, "'", "''") + "'"
             }
