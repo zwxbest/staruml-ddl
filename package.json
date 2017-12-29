@@ -1,15 +1,15 @@
 {
-    "name": "niklauslee.staruml-ddl",
+    "name": "cockroachPeng.staruml-ddl",
     "title": "DDL (Data Definition Language)",
     "description": "Generate DDL (Data Definition Language) from ERD",
-    "homepage": "https://github.com/niklauslee/staruml-ddl",
-    "issues": "https://github.com/niklauslee/staruml-ddl/issues",
+    "homepage": "https://github.com/cockroachPeng/staruml-ddl",
+    "issues": "https://github.com/cockroachPeng/staruml-ddl/issues",
     "keywords": ["ddl", "erd", "database"],
     "version": "1.0.1",
     "author": {
-        "name": "niklauslee",
-        "email": "niklaus.lee@gmail.com",
-        "url": "https://github.com/niklauslee"
+        "name": "cockroachPeng",
+        "email": "pgq827258406@icloud.com",
+        "url": "https://github.com/cockroachPeng"
     },
     "license": "MIT",
     "engines": {
