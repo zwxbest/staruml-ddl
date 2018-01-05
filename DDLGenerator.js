@@ -119,7 +119,7 @@ define(function (require, exports, module) {
      */
     DDLGenerator.prototype.getColumnString = function (col, options) {
         var self = this;
-        var line = self.getId(elem.name, options);
+        var line = self.getId(col.name, options);
         var _type = col.getTypeString();
         if (_type.trim().length === 0) {
             _type ="INTEGER";
@@ -129,13 +129,11 @@ define(function (require, exports, module) {
             line += " NOT NULL";
         }
 
-        line += "COMMENT '备注'"
-
         if (options.dbms === "mysql") {
 
             var documentation = col.documentation;
             if (!!documentation){
-                line += "COMMENT '" + self.replaceAll(documentation, "'", "''") + "'"
+                line += " COMMENT '" + self.replaceAll(documentation, "'", "''") + "'"
             }
         }
 
@@ -254,7 +252,11 @@ define(function (require, exports, module) {
         }
 
         codeWriter.outdent();
-        codeWriter.writeLine(");");
+        if (options.dbms === "mysql" && !!elem.documentation) {
+            codeWriter.writeLine(") COMMENT '"+self.replaceAll(elem.documentation, "'", "''")+"';");
+        }else{
+            codeWriter.writeLine(");");
+        }
         codeWriter.writeLine();
     };
 
