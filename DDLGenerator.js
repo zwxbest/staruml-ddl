@@ -127,10 +127,14 @@ define(function (require, exports, module) {
         line += " " + _type;
         if (col.primaryKey || !col.nullable) {
             line += " NOT NULL";
+            _type = _type.trim();
+			if(_type.indexOf('char')!= -1){
+             	line += " DEFAULT ''";		
+			}else if (_type.indexOf('int')!=-1){
+			    line += " DEFAULT '0'"
+			}
         }
-
         if (options.dbms === "mysql") {
-
             var documentation = col.documentation;
             if (!!documentation){
                 line += " COMMENT '" + self.replaceAll(documentation, "'", "''") + "'"
